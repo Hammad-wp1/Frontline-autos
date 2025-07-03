@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [uploadedCar, setUploadedCar] = useState(null);
+const App = () => {
+  const [activeTab, setActiveTab] = React.useState('home');
 
   const carsForSale = [
     {
@@ -34,34 +33,39 @@ export default function App() {
     },
   ];
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUploadedCar({
-          image: e.target.result,
-          name: file.name,
-          size: `${(file.size / 1024).toFixed(2)} KB`,
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
+    <div className="bg-gray-100 min-h-screen font-sans text-gray-800">
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-600">Frontline Autos</h1>
           <nav>
             <ul className="flex space-x-6">
-              <li><button onClick={() => setActiveTab('home')} className={`font-medium ${activeTab === 'home' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>Home</button></li>
-              <li><button onClick={() => setActiveTab('browse')} className={`font-medium ${activeTab === 'browse' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>Browse Cars</button></li>
-              <li><button onClick={() => setActiveTab('sell')} className={`font-medium ${activeTab === 'sell' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>Sell/Trade</button></li>
-              <li><button onClick={() => setActiveTab('premium')} className={`font-medium ${activeTab === 'premium' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>Premium</button></li>
-              <li><button onClick={() => setActiveTab('contact')} className={`font-medium ${activeTab === 'contact' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>Contact</button></li>
+              <li>
+                <button onClick={() => setActiveTab('home')} className={`font-medium ${activeTab === 'home' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>
+                  Home
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActiveTab('browse')} className={`font-medium ${activeTab === 'browse' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>
+                  Browse Cars
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActiveTab('sell')} className={`font-medium ${activeTab === 'sell' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>
+                  Sell/Trade
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActiveTab('premium')} className={`font-medium ${activeTab === 'premium' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>
+                  Premium
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setActiveTab('contact')} className={`font-medium ${activeTab === 'contact' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}>
+                  Contact
+                </button>
+              </li>
             </ul>
           </nav>
         </div>
@@ -76,7 +80,11 @@ export default function App() {
             <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-8">
               Your trusted source for quality second-hand cars. Sell your car quickly or browse our latest stock.
             </p>
-            <img src=" https://placehold.co/1200x400?text=Used+Car+Dealership" alt="Banner" className="rounded-lg shadow-lg w-full max-w-4xl mx-auto" />
+            <img
+              src=" https://placehold.co/1200x400?text=Used+Car+Dealership"
+              alt="Banner"
+              className="rounded-lg shadow-lg w-full max-w-4xl mx-auto"
+            />
           </section>
         )}
 
@@ -109,23 +117,9 @@ export default function App() {
             <form className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Upload a Photo of Your Car</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="w-full border border-gray-300 rounded-md p-2"
-                />
+                <input type="file" accept="image/*" className="w-full border border-gray-300 rounded-md p-2" />
               </div>
-              {uploadedCar && (
-                <div className="mt-4 text-center">
-                  <img src={uploadedCar.image} alt={uploadedCar.name} className="mx-auto h-48 object-cover rounded" />
-                  <p className="mt-2 text-sm text-gray-600">File: {uploadedCar.name}, Size: {uploadedCar.size}</p>
-                </div>
-              )}
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded transition duration-200"
-              >
+              <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded transition duration-200">
                 Submit for Evaluation
               </button>
             </form>
@@ -142,14 +136,9 @@ export default function App() {
               </p>
               <div className="flex flex-col items-center">
                 <p className="text-xl font-semibold text-green-600 mb-4">R100/month</p>
-                <a
-                  href=" https://paypal.me/YOUR_PAYPAL_ID "
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200"
-                >
-                  Subscribe Now
-                </a>
+                <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                  Subscribe Now (R100/month)
+                </button>
                 <p className="mt-4 text-sm text-gray-500">Pay via PayPal or bank transfer</p>
               </div>
             </div>
@@ -175,13 +164,14 @@ export default function App() {
               </div>
               <iframe
                 title="Google Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.657639636286!2d28.05757431504665!3d-26.116409783446796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950b0d5a7c0a01%3A0x3aa9d6bfa7089af4!2sSandton%2C%20Johannesburg!5e0!3m2!1sen!2sza!4v1698765432109!5m2!1sen!2sza"
+                src=" https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.657639636286!2d28.05757431504665!3d-26.116409783446796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950b0d5a7c0a01%3A0x3aa9d6bfa7089af4!2sSandton%2C+Johannesburg!5e0!3m2!1sen!2sza!4v1698765432109!5m2!1sen!2sza"
                 width="100%"
                 height="300"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg shadow-md"
               ></iframe>
               <a href=" https://wa.me/27111234567 " target="_blank" rel="noopener noreferrer" className="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200">
                 Chat on WhatsApp
@@ -210,4 +200,6 @@ export default function App() {
       </footer>
     </div>
   );
-}
+};
+
+export default App;
