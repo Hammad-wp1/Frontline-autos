@@ -1,4 +1,4 @@
-function AuthPage({ onAuth }) {
+import App from './App';
   const [isLogin, setIsLogin] = React.useState(true);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
